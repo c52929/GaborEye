@@ -25,7 +25,8 @@
 #patches img {
   box-sizing: border-box;
   border: 2px solid transparent;
-  width: 24%;
+  width: 24vmin;
+  height: 24vmin;
 }
 
 #patches img.rotate {
@@ -42,6 +43,42 @@
 
 #patches img.incorrect {
   border: 2px solid #f07;
+}
+
+@media (orientation: landscape) {
+  #patches {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    align-items: center;
+  }
+  #patches img {
+    width: 12.5vw;
+    height: 12.5vw;
+  }
+}
+
+@media (min-width: 768px) {
+  #patches {
+    width: 50%;
+    height: unset;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #patches img {
+    width: 8vw;
+    height: 8vw;
+  }
+  #patches img:hover:not(.transparent) {
+    cursor: pointer;
+  }
+  #patches img:hover:not(.transparent):not(.selected) {
+    border: 2px solid #fca;
+  }
 }
 
 .transparent {
