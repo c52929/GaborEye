@@ -1,6 +1,6 @@
 'use strict';
 {
-	let patchList, judge;
+	let patchList, judge, time;
 
 	function reset() {
 		patchList=[];
@@ -11,7 +11,7 @@
 				}
 			}
 		}
-		console.log(patchList);
+		// console.log(patchList);
 		for(let i=0; i<24; i++){
 			const addPatch=document.createElement('img');
 			addPatch.setAttribute('src',`img/patch${patchList[i].charAt(0)}.jpg`);
@@ -27,9 +27,10 @@
 
 	function check(){
 		judge=[];
+		time=0;
 		for(let i=0; i<24; i++){
 			document.querySelectorAll('img')[i].addEventListener('click',()=>{
-				if(patchList[i]!='none'){
+				if(patchList[i]!='none' && time==0){
 					if(judge.indexOf(i)<0){
 						judge.push(i);
 					}else{
@@ -38,6 +39,7 @@
 					document.querySelectorAll('img')[i].classList.toggle('selected');
 					// console.log(document.getElementsByClassName('selected'));
 					if(judge.length>1){
+						time=1;
 						// console.log(judge);
 						if(patchList[judge[0]]==patchList[judge[1]]){
 							for(let j=0; j<2; j++){
@@ -71,12 +73,13 @@
 									break;
 								}
 							}
+							time=0;
 							if(noneNum==24){
 								document.getElementById('patches').innerHTML='';
 								reset();
 								check();
 							}
-						}, 500);
+						}, 700);
 					}
 				}
 			})
